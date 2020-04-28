@@ -4,8 +4,18 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * @author BasilAn
+ * @version 1.0
+ */
 public class ConvertFun {
 
+    /**
+     * Preparatory string analysis
+     *
+     * @param str - parsing string
+     * @return word list
+     */
     public static ArrayList<String> strInList(final String str) {
 
         ArrayList<String> answer = new ArrayList<>();
@@ -20,6 +30,13 @@ public class ConvertFun {
         return answer;
     }
 
+    /**
+     * Final data analysis
+     *
+     * @param arrStr - list of pre-analyzed words
+     * @return FootballTeam type object
+     * @throws Exception - exception arising from incorrect data
+     */
     public static FootballTeam listInFootballTeam(final ArrayList<String> arrStr) throws Exception {
 
         final byte indexNumGame = 1;

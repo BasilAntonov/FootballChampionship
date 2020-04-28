@@ -8,12 +8,33 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
+/**
+ * The program of the football championship.
+ * The input to the program is a file with the
+ * results of the football championship.
+ * The program determines the winner or leader
+ * based on the data received.
+ *
+ * @author BasilAn
+ * @version 0.1
+ */
 public class FootballChampionship {
 
     private static final Logger logger = Logger.getLogger(FootballChampionship.class.getName());
 
+    /**
+     * File name to read
+     */
     private final static String FILE_READ = "input.txt";
+
+    /**
+     * File name to write
+     */
     private final static String FILE_WRITE = "output.txt";
+
+    /**
+     * File encoding for reading
+     */
     private final static String FILE_ENCODING = "cp1251";
 
     public static void main(String[] args) {

@@ -5,8 +5,23 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * The class implements the input / output functions for the file
+ *
+ * @author BasilAn
+ * @version 0.1
+ */
 public class FileFun {
 
+    /**
+     * The function of reading a file with the
+     * conversion of the received data into an ArrayList
+     *
+     * @param nameFile - file name to read
+     * @param encoding - file encoding for reading
+     * @return Parsed List
+     * @throws Exception - exceptions arising from the function
+     */
     public static ArrayList<FootballTeam> readFile(final String nameFile, final String encoding) throws Exception {
 
         ArrayList<FootballTeam> answer = new ArrayList<>();
@@ -22,9 +37,19 @@ public class FileFun {
         return answer;
     }
 
-    public static void writeFile(final String nameFile, boolean flag, final ArrayList<FootballTeam> data) throws Exception {
+    /**
+     *
+     *
+     * @param nameFile - the name of the file to write
+     * @param flag - flag for file entry type
+     * @param data - data to write to file
+     * @throws Exception - exceptions arising from the function
+     */
+    public static void writeFile(final String nameFile, boolean flag, final ArrayList<FootballTeam> data)
+            throws Exception {
 
-        Writer write = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(nameFile), StandardCharsets.UTF_8));
+        Writer write = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(nameFile),
+                StandardCharsets.UTF_8));
 
         int count = 1;
 
@@ -76,6 +101,7 @@ public class FileFun {
 
         write.close();
     }
+
 
     public static void writeFile(final String nameFile, Exception e) {
 
