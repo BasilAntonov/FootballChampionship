@@ -5,6 +5,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
+ * A class that implements data
+ * conversion functions
+ *
  * @author BasilAn
  * @version 1.0
  */

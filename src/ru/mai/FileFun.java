@@ -38,7 +38,8 @@ public class FileFun {
     }
 
     /**
-     *
+     * The function of writing to the program
+     * results file
      *
      * @param nameFile - the name of the file to write
      * @param flag - flag for file entry type
@@ -102,7 +103,13 @@ public class FileFun {
         write.close();
     }
 
-
+    /**
+     * Function to write a software error
+     * to a file
+     *
+     * @param nameFile - the name of the file to write
+     * @param e - exception for write
+     */
     public static void writeFile(final String nameFile, Exception e) {
 
         try {

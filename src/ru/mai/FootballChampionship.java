@@ -47,13 +47,9 @@ public class FootballChampionship {
             logger.addHandler(fh1);
             logger.addHandler(fh);
         } catch (SecurityException e) {
-            logger.log(Level.SEVERE,
-                    "Не удалось создать файл лога из-за политики безопасности.",
-                    e);
+            logger.log(Level.SEVERE, "Не удалось создать файл лога из-за политики безопасности.", e);
         } catch (IOException e) {
-            logger.log(Level.SEVERE,
-                    "Не удалось создать файл лога из-за ошибки ввода-вывода.",
-                    e);
+            logger.log(Level.SEVERE, "Не удалось создать файл лога из-за ошибки ввода-вывода.", e);
         }
 
         try {
@@ -76,12 +72,10 @@ public class FootballChampionship {
 
             FileFun.writeFile(FILE_WRITE, finalResult, data);
 
-            logger.log(Level.INFO, "Корректно завершилась работа");
+            logger.log(Level.INFO, "Корректно завершена работа программы");
         } catch (Exception e) {
             FileFun.writeFile(FILE_WRITE, e);
-            logger.log(Level.SEVERE,
-                    "Рухнул main",
-                    e);
+            logger.log(Level.SEVERE, "ERROR!", e);
         }
     }
 }
