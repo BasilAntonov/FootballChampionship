@@ -1,0 +1,46 @@
+@startuml
+
+skinparam classAttributeIconSize 0
+
+class FootballChampionship {
+
+    - {static} logger : Logger
+    - {static} FILE_READ : String
+    - {static} FILE_WRITE : String
+    - {static} FILE_ENCODING : String
+
+    + {static} main(args : String)
+}
+
+class FootballTeam {
+
+    - name : String
+    - numGame : Integer
+    - points : Integer
+
+    + FootballTeam(name : String, numGame : Integer, points : Integer)
+    + getName() : String
+    + getNumGame() : Integer
+    + getPoints() : Integer
+    + compareTo(o : FootballTeam) : Integer
+}
+
+class ConvertFun {
+
+    + {static} strInList(str : String) : ArrayList<String>
+    + {static} listInFootballTeam(arrStr : ArrayList<String>) : FootballTeam
+}
+
+class FileFun {
+
+    + {static} readFile(nameFile : String, encoding : String) : ArrayList<FootballTeam>
+    + {static} writeFile(nameFile : String, flag : Boolean, data : ArrayList<FootballTeam>)
+    + {static} writeFile(nameFile : String, e : Exception)
+}
+
+FootballChampionship .> FootballTeam
+FootballChampionship ..> FileFun
+FileFun .> ConvertFun
+FileFun ..> FootballTeam
+ConvertFun .> FootballTeam
+@enduml
