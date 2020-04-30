@@ -9,7 +9,7 @@ import java.util.Scanner;
  * The class implements the input / output functions for the file
  *
  * @author BasilAn
- * @version 0.1
+ * @version 0.2
  */
 public class FileFun {
 
@@ -19,20 +19,23 @@ public class FileFun {
      *
      * @param nameFile - file name to read
      * @param encoding - file encoding for reading
-     * @return Parsed List
-     * @throws Exception - exceptions arising from the function
+     * @return - Parsed List
+     * @throws FileNotFoundException - the file with the
+     * specified path does not exist
+     * @throws UnsupportedEncodingException - the character
+     * encoding is not supported.
      */
-    public static ArrayList<FootballTeam> readFile(final String nameFile, final String encoding) throws Exception {
+    public static ArrayList<FootballTeam> readFile(final String nameFile, final String encoding)
+            throws FileNotFoundException, UnsupportedEncodingException {
 
         ArrayList<FootballTeam> answer = new ArrayList<>();
 
-        Scanner scanner = new Scanner(new InputStreamReader(new FileInputStream(nameFile), encoding));
+        try(Scanner scanner = new Scanner(new InputStreamReader(new FileInputStream(nameFile), encoding))) {
 
-        while (scanner.hasNext()) {
-            answer.add(ConvertFun.listInFootballTeam(ConvertFun.strInList(scanner.nextLine())));
+            while (scanner.hasNext()) {
+                answer.add(ConvertFun.listInFootballTeam(ConvertFun.strInList(scanner.nextLine())));
+            }
         }
-
-        scanner.close();
 
         return answer;
     }
@@ -44,82 +47,77 @@ public class FileFun {
      * @param nameFile - the name of the file to write
      * @param flag - flag for file entry type
      * @param data - data to write to file
-     * @throws Exception - exceptions arising from the function
+     * @throws IOException - exceptions arising from the function
      */
     public static void writeFile(final String nameFile, boolean flag, final ArrayList<FootballTeam> data)
-            throws Exception {
+            throws IOException {
 
-        Writer write = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(nameFile),
-                StandardCharsets.UTF_8));
+        try(Writer write = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(nameFile),
+                StandardCharsets.UTF_8))) {
 
-        int count = 1;
+            int count = 1;
 
-        int buff = data.get(0).getPoints();
+            int buff = data.get(0).getPoints();
 
-        for (int i = 1; i < data.size(); i++) {
-            if (buff != data.get(i).getPoints()) {
-                break;
-            } else {
-                count++;
-            }
-        }
-
-        if (flag) {
-            if (count == 1){
-                final String victor = "Победитель турнира - ";
-
-                write.write(victor);
-                write.write(data.get(0).getName());
-            } else {
-                final String victor = "Победители турнира: ";
-                final String space = "\n\t";
-
-                write.write(victor);
-
-                for (int i = 0; i < count; i++) {
-                    write.write(space);
-                    write.write(data.get(i).getName());
+            for (int i = 1; i < data.size(); i++) {
+                if (buff != data.get(i).getPoints()) {
+                    break;
+                } else {
+                    count++;
                 }
             }
-        } else {
-            if (count == 1){
-                final String victor = "Текущий лидер - ";
 
-                write.write(victor);
-                write.write(data.get(0).getName());
+            if (flag) {
+                if (count == 1){
+                    final String victor = "Победитель турнира - ";
+
+                    write.write(victor);
+                    write.write(data.get(0).getName());
+                } else {
+                    final String victor = "Победители турнира: ";
+                    final String space = "\n\t";
+
+                    write.write(victor);
+
+                    for (int i = 0; i < count; i++) {
+                        write.write(space);
+                        write.write(data.get(i).getName());
+                    }
+                }
             } else {
-                final String victor = "Текущие лидеры: ";
-                final String space = "\n\t";
+                if (count == 1){
+                    final String victor = "Текущий лидер - ";
 
-                write.write(victor);
+                    write.write(victor);
+                    write.write(data.get(0).getName());
+                } else {
+                    final String victor = "Текущие лидеры: ";
+                    final String space = "\n\t";
 
-                for (int i = 0; i < count; i++) {
-                    write.write(space);
-                    write.write(data.get(i).getName());
+                    write.write(victor);
+
+                    for (int i = 0; i < count; i++) {
+                        write.write(space);
+                        write.write(data.get(i).getName());
+                    }
                 }
             }
         }
-
-        write.close();
     }
 
     /**
-     * Function to write a software error
-     * to a file
+     * Function to write a string to a file
      *
      * @param nameFile - the name of the file to write
-     * @param e - exception for write
+     * @param massage - string for writing
+     * @throws IOException - exceptions arising from the function
      */
-    public static void writeFile(final String nameFile, Exception e) {
+    public static void writeFile(final String nameFile, final String massage) throws IOException {
 
-        try {
-            FileOutputStream write = new FileOutputStream(nameFile);
+        try(Writer write = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(nameFile),
+                StandardCharsets.UTF_8))) {
 
-            write.write(e.getMessage().getBytes());
-
-            write.close();
-        } catch (IOException ioe) {
-            System.out.println(ioe.getMessage());
+            write.write(massage);
         }
     }
 }

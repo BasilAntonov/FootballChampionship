@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
  * conversion functions
  *
  * @author BasilAn
- * @version 1.0
+ * @version 1.1
  */
 public class ConvertFun {
 
@@ -38,9 +38,10 @@ public class ConvertFun {
      *
      * @param arrStr - list of pre-analyzed words
      * @return FootballTeam type object
-     * @throws Exception - exception arising from incorrect data
+     * @throws ClassCastException - exception arising from incorrect data
      */
-    public static FootballTeam listInFootballTeam(final ArrayList<String> arrStr) throws Exception {
+    public static FootballTeam listInFootballTeam(final ArrayList<String> arrStr)
+            throws ClassCastException {
 
         final byte indexNumGame = 1;
         final byte indexPoints = 2;
@@ -50,7 +51,7 @@ public class ConvertFun {
         int points;
 
         if (arrStr.size() != sizeList) {
-            throw new Exception("Conversion incorrect data!");
+            throw new ClassCastException("Conversion incorrect data!");
         } else {
             Pattern pattern = Pattern.compile("\\d+");
 
@@ -58,28 +59,28 @@ public class ConvertFun {
 
             Matcher matcher = pattern.matcher(arrStr.get(indexNumGame));
 
-            while (matcher.find()){
+            while (matcher.find()) {
                 count++;
             }
 
             if (count == 1) {
                 numGame = Integer.parseInt(arrStr.get(indexNumGame).replaceAll("[^0-9]", ""));
             } else {
-                throw new Exception("Conversion incorrect data!");
+                throw new ClassCastException("Conversion incorrect data!");
             }
 
             count = 0;
 
             matcher = pattern.matcher(arrStr.get(indexPoints));
 
-            while (matcher.find()){
+            while (matcher.find()) {
                 count++;
             }
 
-            if (count == 1){
+            if (count == 1) {
                 points = Integer.parseInt(arrStr.get(indexPoints).replaceAll("[^0-9]", ""));
             } else {
-                throw new Exception("Conversion incorrect data!");
+                throw new ClassCastException("Conversion incorrect data!");
             }
         }
 
