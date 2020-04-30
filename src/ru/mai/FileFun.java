@@ -20,17 +20,17 @@ public class FileFun {
      * @param nameFile - file name to read
      * @param encoding - file encoding for reading
      * @return - Parsed List
-     * @throws FileNotFoundException - the file with the
-     * specified path does not exist
+     * @throws FileNotFoundException        - the file with the
+     *                                      specified path does not exist
      * @throws UnsupportedEncodingException - the character
-     * encoding is not supported.
+     *                                      encoding is not supported.
      */
     public static ArrayList<FootballTeam> readFile(final String nameFile, final String encoding)
             throws FileNotFoundException, UnsupportedEncodingException {
 
         ArrayList<FootballTeam> answer = new ArrayList<>();
 
-        try(Scanner scanner = new Scanner(new InputStreamReader(new FileInputStream(nameFile), encoding))) {
+        try (Scanner scanner = new Scanner(new InputStreamReader(new FileInputStream(nameFile), encoding))) {
 
             while (scanner.hasNext()) {
                 answer.add(ConvertFun.listInFootballTeam(ConvertFun.strInList(scanner.nextLine())));
@@ -45,14 +45,14 @@ public class FileFun {
      * results file
      *
      * @param nameFile - the name of the file to write
-     * @param flag - flag for file entry type
-     * @param data - data to write to file
+     * @param flag     - flag for file entry type
+     * @param data     - data to write to file
      * @throws IOException - exceptions arising from the function
      */
     public static void writeFile(final String nameFile, boolean flag, final ArrayList<FootballTeam> data)
             throws IOException {
 
-        try(Writer write = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(nameFile),
+        try (Writer write = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(nameFile),
                 StandardCharsets.UTF_8))) {
 
             int count = 1;
@@ -68,7 +68,7 @@ public class FileFun {
             }
 
             if (flag) {
-                if (count == 1){
+                if (count == 1) {
                     final String victor = "Победитель турнира - ";
 
                     write.write(victor);
@@ -85,7 +85,7 @@ public class FileFun {
                     }
                 }
             } else {
-                if (count == 1){
+                if (count == 1) {
                     final String victor = "Текущий лидер - ";
 
                     write.write(victor);
@@ -109,12 +109,12 @@ public class FileFun {
      * Function to write a string to a file
      *
      * @param nameFile - the name of the file to write
-     * @param massage - string for writing
+     * @param massage  - string for writing
      * @throws IOException - exceptions arising from the function
      */
     public static void writeFile(final String nameFile, final String massage) throws IOException {
 
-        try(Writer write = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(nameFile),
+        try (Writer write = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(nameFile),
                 StandardCharsets.UTF_8))) {
 
             write.write(massage);
