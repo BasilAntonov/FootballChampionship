@@ -25,7 +25,7 @@ class FootballTeam {
     + compareTo(o : FootballTeam) : Integer
 }
 
-class ConvertFun {
+class StringToFootballTeamConverter {
 
     + {static} strInList(str : String) : ArrayList<String>
     + {static} listInFootballTeam(arrStr : ArrayList<String>) : FootballTeam
@@ -35,12 +35,12 @@ class FileFun {
 
     + {static} readFile(nameFile : String, encoding : String) : ArrayList<FootballTeam>
     + {static} writeFile(nameFile : String, flag : Boolean, data : ArrayList<FootballTeam>)
-    + {static} writeFile(nameFile : String, e : Exception)
+    + {static} writeFile(nameFile : String, massage : String)
 }
 
 FootballChampionship .> FootballTeam
 FootballChampionship ..> FileFun
-FileFun .> ConvertFun
+FileFun .> StringToFootballTeamConverter
 FileFun ..> FootballTeam
-ConvertFun .> FootballTeam
+StringToFootballTeamConverter .> FootballTeam
 @enduml

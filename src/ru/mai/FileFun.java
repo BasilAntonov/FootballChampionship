@@ -9,7 +9,7 @@ import java.util.Scanner;
  * The class implements the input / output functions for the file
  *
  * @author BasilAn
- * @version 0.2
+ * @version 1.0
  */
 public class FileFun {
 
@@ -33,7 +33,8 @@ public class FileFun {
         try (Scanner scanner = new Scanner(new InputStreamReader(new FileInputStream(nameFile), encoding))) {
 
             while (scanner.hasNext()) {
-                answer.add(ConvertFun.listInFootballTeam(ConvertFun.strInList(scanner.nextLine())));
+                answer.add(StringToFootballTeamConverter.listInFootballTeam(
+                        StringToFootballTeamConverter.strInList(scanner.nextLine())));
             }
         }
 

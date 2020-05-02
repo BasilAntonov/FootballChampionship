@@ -8,7 +8,6 @@ import java.util.Collections;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
 
 /**
  * The program of the football championship.
@@ -18,7 +17,7 @@ import java.util.logging.SimpleFormatter;
  * based on the data received.
  *
  * @author BasilAn
- * @version 0.2
+ * @version 1.0
  */
 public class FootballChampionship {
 
@@ -42,11 +41,7 @@ public class FootballChampionship {
     public static void main(String[] args) {
 
         try {
-            FileHandler fh1 = new FileHandler("FootballChampionshipTXT.log");
-            FileHandler fh = new FileHandler("FootballChampionshipXML.log");
-            fh.setFormatter(new SimpleFormatter());
-
-            logger.addHandler(fh1);
+            FileHandler fh = new FileHandler("FootballChampionship.log");
             logger.addHandler(fh);
         } catch (SecurityException e) {
             logger.log(Level.SEVERE, "Не удалось создать файл лога из-за политики безопасности.", e);
@@ -55,7 +50,7 @@ public class FootballChampionship {
         }
 
         try {
-            logger.log(Level.INFO, "Начала работы");
+            logger.log(Level.INFO, "Начала работы программы");
 
             ArrayList<FootballTeam> data = FileFun.readFile(FILE_READ, FILE_ENCODING);
 
@@ -75,32 +70,33 @@ public class FootballChampionship {
             FileFun.writeFile(FILE_WRITE, finalResult, data);
 
             logger.log(Level.INFO, "Корректно завершена работа программы");
-        } catch (ClassCastException cce) {
-            logger.log(Level.SEVERE, cce.getMessage(), cce);
+        } catch (StringToFootballTeamException ex) {
+            logger.log(Level.SEVERE, ex.getMessage(), ex);
+            logger.log(Level.SEVERE, "Строка или часть строки породившая ошибку выше: " + ex.getErrorCreator());
             try {
                 FileFun.writeFile(FILE_WRITE, "Некорректные данные в файле");
-            } catch (IOException ioe) {
-                logger.log(Level.SEVERE, ioe.getMessage(), ioe);
+            } catch (IOException e) {
+                logger.log(Level.SEVERE, e.getMessage(), e);
             }
             logger.log(Level.INFO, "Некорректно завершена работа программы");
         } catch (FileNotFoundException ffe) {
             logger.log(Level.SEVERE, ffe.getMessage(), ffe);
             try {
                 FileFun.writeFile(FILE_WRITE, "Нет файла с таким именем");
-            } catch (IOException ioe) {
-                logger.log(Level.SEVERE, ioe.getMessage(), ioe);
+            } catch (IOException e) {
+                logger.log(Level.SEVERE, e.getMessage(), e);
             }
             logger.log(Level.INFO, "Некорректно завершена работа программы");
         } catch (UnsupportedEncodingException uee) {
             logger.log(Level.SEVERE, uee.getMessage(), uee);
             try {
                 FileFun.writeFile(FILE_WRITE, "Кодировка символов не поддерживается");
-            } catch (IOException ioe) {
-                logger.log(Level.SEVERE, ioe.getMessage(), ioe);
+            } catch (IOException e) {
+                logger.log(Level.SEVERE, e.getMessage(), e);
             }
             logger.log(Level.INFO, "Некорректно завершена работа программы");
-        } catch (IOException ioe) {
-            logger.log(Level.SEVERE, ioe.getMessage(), ioe);
+        } catch (IOException e) {
+            logger.log(Level.SEVERE, e.getMessage(), e);
             logger.log(Level.INFO, "Некорректно завершена работа программы");
         }
     }
