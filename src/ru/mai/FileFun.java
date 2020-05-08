@@ -3,6 +3,7 @@ package ru.mai;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
@@ -75,29 +76,37 @@ public class FileFun {
      * results file
      *
      * @param nameFile - the name of the file to write
-     * @param flag     - flag for file entry type
      * @param data     - data to write to file
      * @throws IOException - exceptions arising from the function
      */
-    public static void writeFile(final String nameFile, boolean flag, final ArrayList<FootballTeam> data)
+    public static void writeFile(final String nameFile, final ArrayList<FootballTeam> data)
             throws IOException {
 
         try (Writer write = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(nameFile),
                 StandardCharsets.UTF_8))) {
 
-            int count = 1;
-
-            int buff = data.get(0).getPoints();
+            boolean finalResult = true;
 
             for (int i = 1; i < data.size(); i++) {
-                if (buff != data.get(i).getPoints()) {
+                if (data.get(0).getNumGame() != data.get(i).getNumGame()) {
+                    finalResult = false;
+                    break;
+                }
+            }
+
+            Collections.sort(data);
+
+            int count = 1;
+
+            for (int i = 1; i < data.size(); i++) {
+                if (data.get(0).getPoints() != data.get(i).getPoints()) {
                     break;
                 } else {
                     count++;
                 }
             }
 
-            if (flag) {
+            if (finalResult) {
                 if (count == 1) {
                     final String victor = "Победитель турнира - ";
 

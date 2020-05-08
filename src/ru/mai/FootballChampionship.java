@@ -2,7 +2,6 @@ package ru.mai;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,7 +14,7 @@ import java.util.logging.Logger;
  * based on the data received.
  *
  * @author BasilAn
- * @version 1.1
+ * @version 1.2
  */
 public class FootballChampionship {
 
@@ -52,20 +51,7 @@ public class FootballChampionship {
 
             ArrayList<FootballTeam> data = FileFun.readFile(FILE_READ, FILE_ENCODING);
 
-            boolean finalResult = true;
-
-            final int buff = data.get(0).getNumGame();
-
-            for (int i = 1; i < data.size(); i++) {
-                if (buff != data.get(i).getNumGame()) {
-                    finalResult = false;
-                    break;
-                }
-            }
-
-            Collections.sort(data);
-
-            FileFun.writeFile(FILE_WRITE, finalResult, data);
+            FileFun.writeFile(FILE_WRITE, data);
 
             logger.log(Level.INFO, "Корректно завершена работа программы");
 
