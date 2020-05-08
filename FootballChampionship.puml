@@ -27,15 +27,13 @@ class FootballTeam {
 
 class StringToFootballTeamConverter {
 
-    + {static} strInList(str : String) : ArrayList<String>
-    + {static} listInFootballTeam(arrStr : ArrayList<String>) : FootballTeam
+    + {static} stringToFootballTeamConverter(str : String) : FootballTeam
 }
 
 class FileFun {
 
     + {static} readFile(nameFile : String, encoding : String) : ArrayList<FootballTeam>
     + {static} writeFile(nameFile : String, flag : Boolean, data : ArrayList<FootballTeam>)
-    + {static} writeFile(nameFile : String, massage : String)
 }
 
 FootballChampionship .> FootballTeam

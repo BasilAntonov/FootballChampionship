@@ -1,8 +1,6 @@
 package ru.mai;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.logging.FileHandler;
@@ -17,7 +15,7 @@ import java.util.logging.Logger;
  * based on the data received.
  *
  * @author BasilAn
- * @version 1.0
+ * @version 1.1
  */
 public class FootballChampionship {
 
@@ -70,31 +68,7 @@ public class FootballChampionship {
             FileFun.writeFile(FILE_WRITE, finalResult, data);
 
             logger.log(Level.INFO, "Корректно завершена работа программы");
-        } catch (StringToFootballTeamException ex) {
-            logger.log(Level.SEVERE, ex.getMessage(), ex);
-            logger.log(Level.SEVERE, "Строка или часть строки породившая ошибку выше: " + ex.getErrorCreator());
-            try {
-                FileFun.writeFile(FILE_WRITE, "Некорректные данные в файле");
-            } catch (IOException e) {
-                logger.log(Level.SEVERE, e.getMessage(), e);
-            }
-            logger.log(Level.INFO, "Некорректно завершена работа программы");
-        } catch (FileNotFoundException ffe) {
-            logger.log(Level.SEVERE, ffe.getMessage(), ffe);
-            try {
-                FileFun.writeFile(FILE_WRITE, "Нет файла с таким именем");
-            } catch (IOException e) {
-                logger.log(Level.SEVERE, e.getMessage(), e);
-            }
-            logger.log(Level.INFO, "Некорректно завершена работа программы");
-        } catch (UnsupportedEncodingException uee) {
-            logger.log(Level.SEVERE, uee.getMessage(), uee);
-            try {
-                FileFun.writeFile(FILE_WRITE, "Кодировка символов не поддерживается");
-            } catch (IOException e) {
-                logger.log(Level.SEVERE, e.getMessage(), e);
-            }
-            logger.log(Level.INFO, "Некорректно завершена работа программы");
+
         } catch (IOException e) {
             logger.log(Level.SEVERE, e.getMessage(), e);
             logger.log(Level.INFO, "Некорректно завершена работа программы");
