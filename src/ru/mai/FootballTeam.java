@@ -1,7 +1,7 @@
 package ru.mai;
 
 /**
- *Class implementing an object football team
+ * Class implementing an object football team
  *
  * @author BasilAn
  * @version 1.0
@@ -23,10 +23,10 @@ public class FootballTeam implements Comparable<FootballTeam> {
      */
     private Integer points;
 
-    FootballTeam(String name, int numGame, int points){
-        this.name=name;
-        this.numGame=numGame;
-        this.points=points;
+    FootballTeam(String name, int numGame, int points) {
+        this.name = name;
+        this.numGame = numGame;
+        this.points = points;
     }
 
     public String getName() {
